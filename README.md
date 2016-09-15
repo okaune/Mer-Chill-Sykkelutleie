@@ -1,1 +1,1 @@
-# Mer-Chill-Sykkelutleie
+# Mer Chill Sykkelutleie
