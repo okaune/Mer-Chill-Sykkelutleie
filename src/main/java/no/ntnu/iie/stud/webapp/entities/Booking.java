@@ -1,21 +1,25 @@
 package no.ntnu.iie.stud.webapp.entities;
 
+import java.time.LocalDateTime;
+
 /**
  * Created by Audun on 15.09.2016.
  */
 public class Booking {
-    private final int id;
     private Bike bike;
-    private User user;
+    private String user;
+    private LocalDateTime createTime;
+    private String bookingCode;
 
-    public Booking(int id, Bike bike, User user) {
-        this.id = id;
-        this.bike = bike;
-        this.user = user;
+    public Booking() {
+
     }
 
-    public int getId() {
-        return id;
+    public Booking(Bike bike, String user, String bookingCode) {
+        this.bike = bike;
+        this.user = user;
+        this.bookingCode = bookingCode;
+        this.createTime = LocalDateTime.now();
     }
 
     public Bike getBike() {
@@ -26,11 +30,27 @@ public class Booking {
         this.bike = bike;
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
+    }
+
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getBookingCode() {
+        return bookingCode;
+    }
+
+    public void setBookingCode(String bookingCode) {
+        this.bookingCode = bookingCode;
     }
 }

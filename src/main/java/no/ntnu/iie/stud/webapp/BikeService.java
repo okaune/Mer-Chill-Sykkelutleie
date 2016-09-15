@@ -1,10 +1,12 @@
 package no.ntnu.iie.stud.webapp;
 
 import no.ntnu.iie.stud.webapp.entities.Bike;
+import no.ntnu.iie.stud.webapp.entities.Booking;
 import no.ntnu.iie.stud.webapp.entities.ParkingSpot;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -40,5 +42,18 @@ public class BikeService {
     @Path("/parkingspots")
     public Collection<ParkingSpot> getParkingSpots() {
         return parkingSpots.values();
+    }
+
+    @POST
+    @Path("/parkingspots/{spotId}/book")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addBooking(@PathParam("spotId") int spotId, @FormParam("bikeId") int bikeId) {
+        if(!parkingSpots.containsKey(spotId)) throw new NotFoundException();
+
+        ParkingSpot spot = parkingSpots.get(spotId);
+        Booking booking = spot.createBooking("root", bikeId);
+        if(booking == null) return Response.status(Response.Status.FORBIDDEN).build();
+
+        return Response.ok(booking, MediaType.APPLICATION_JSON).build();
     }
 }
