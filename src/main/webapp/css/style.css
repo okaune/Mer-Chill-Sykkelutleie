@@ -119,6 +119,9 @@ h2 {
     padding-right: 1rem;
     margin-right: 1rem;
 }
+.available-bikes .bike__info {
+    min-width: 50%;
+}
 .available-bikes .bike__info .progress {
     position: relative;
     -webkit-transition: background 200ms ease-in-out;
