@@ -17,7 +17,7 @@ import java.util.HashMap;
 public class BikeService {
     private static HashMap<Integer, ParkingSpot> parkingSpots;
     static {
-        parkingSpots = new HashMap<Integer, ParkingSpot>();
+        parkingSpots = new HashMap<>();
         parkingSpots.put(1, new ParkingSpot(1, "Dragvoll"));
         parkingSpots.put(2, new ParkingSpot(2, "Gløshaugen"));
         parkingSpots.put(3, new ParkingSpot(3, "Kalvskinnet"));
@@ -55,5 +55,30 @@ public class BikeService {
         if(booking == null) return Response.status(Response.Status.FORBIDDEN).build();
 
         return Response.ok(booking, MediaType.APPLICATION_JSON).build();
+    }
+
+    @PUT
+    @Path("/bikes")
+    public Response changeBikeState(@FormParam("bikeId") int bikeId, @FormParam("spotId") int spotId, @FormParam("code") String code) {
+        if(!parkingSpots.containsKey(spotId)) throw new NotFoundException();
+
+        ParkingSpot spot = parkingSpots.get(spotId);
+        if(!spot.getBikes().containsKey(bikeId)) throw new NotFoundException();
+        Bike bike = spot.getBikes().get(bikeId);
+
+        // Check if booked. If booked, check the code
+        if(spot.hasBooking(bikeId)) {
+            Booking booking = spot.getBooking(bikeId);
+            if(!booking.getBookingCode().equalsIgnoreCase(code)) return Response.status(Response.Status.FORBIDDEN).build();
+
+            spot.removeBooking(bikeId);
+            return Response.ok(bike, MediaType.APPLICATION_JSON).build();
+        }
+
+        // User wants to return bike?
+        if(bike.isAvailable()) return Response.status(Response.Status.FORBIDDEN).build();
+
+        bike.setAvailable(true);
+        return Response.ok(bike, MediaType.APPLICATION_JSON).build();
     }
 }

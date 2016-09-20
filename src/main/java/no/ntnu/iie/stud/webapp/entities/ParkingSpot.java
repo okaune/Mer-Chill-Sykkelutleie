@@ -1,5 +1,8 @@
 package no.ntnu.iie.stud.webapp.entities;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -94,5 +97,29 @@ public class ParkingSpot {
 
     private static String generateBookingCode() {
         return (random.nextInt(899999) + 100000) + "";
+    }
+
+    public boolean hasBooking(int bikeId) {
+        if(!bookings.containsKey(bikeId)) return false;
+        Booking booking = bookings.get(bikeId);
+
+        if(ChronoUnit.MINUTES.between(LocalDateTime.now(), booking.getCreateTime()) > 30) {
+            // Time's up!
+            bookings.remove(bikeId);
+
+            // Reset bike state
+            Bike bike = bikes.get(bikeId);
+            bike.setAvailable(true);
+            return false;
+        }
+        return true;
+    }
+
+    public Booking getBooking(int bikeId) {
+        return bookings.get(bikeId);
+    }
+
+    public void removeBooking(int bikeId) {
+        bookings.remove(bikeId);
     }
 }
