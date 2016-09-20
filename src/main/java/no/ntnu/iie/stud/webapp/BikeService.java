@@ -23,6 +23,7 @@ public class BikeService {
         parkingSpots.put(3, new ParkingSpot(3, "Kalvskinnet"));
         parkingSpots.put(4, new ParkingSpot(4, "Midtbyen"));
         parkingSpots.put(5, new ParkingSpot(5, "Solsiden"));
+        parkingSpots.put(6, new ParkingSpot(6, "Malvik"));
 
         parkingSpots.get(1).addBike(new Bike(1, 0.50, true));
         parkingSpots.get(1).addBike(new Bike(2, 0.75, true));
