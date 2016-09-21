@@ -20,13 +20,28 @@ $(document).on("click", '.bike', function(event) {
     var id = event.currentTarget.innerText.replace(/(\r\n|\n|\r)/gm,"");
 
     $("body").append(
-        '<div class="reserveModal">' +
+        '<div class="popup reserveModal">' +
             '<h3>Vil du reservere sykkel nr. ' + id + '?</h3>' +
             '<div class="btn-group">' +
-                '<button class="btn btn-default">Ja</button>' +
-                '<button class="btn btn-default">Nei</button>' +
+                '<button class="btn btn-default btn-confirm">Ja</button>' +
+                '<button class="btn btn-default btn-cancel">Nei</button>' +
             '</div>' +
         '</div>'
+    );
+});
+
+$(document).on("click", '.btn-cancel', function() {
+    var popup = $(".popup");
+    popup.animate(
+        {
+            top: 0,
+            opacity: 0
+        },
+        300,
+        "swing",
+        function() {
+            $(this).remove();
+        }
     );
 });
 
