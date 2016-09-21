@@ -1,6 +1,9 @@
 @charset "UTF-8";
 body {
     background: #f4f4f4;
+    display: flex;
+    flex-flow: column nowrap;
+    min-height: 100vh;
 }
 
 header {
@@ -28,9 +31,15 @@ header h1 {
         line-height: 6rem;
     }
 }
-
 .main-area {
     padding: 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    transform: translateY(calc(50vh - 137px));
+    transition: all 300ms ease-in-out;
+}
+.main-area.selected {
+    transform: translateY(0);
 }
 .main-area .reserve {
     position: relative;
@@ -96,6 +105,19 @@ h2 {
     -ms-flex-pack: distribute;
     justify-content: space-around;
     width: calc(25% - 1rem);
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: loadBikes 500ms 100ms ease-in-out forwards;
+}
+@keyframes loadBikes {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 @media (max-width: 885px) {
     .available-bikes .bike {
@@ -121,6 +143,13 @@ h2 {
 }
 .available-bikes .bike__info {
     min-width: 50%;
+}
+.available-bikes .bike__info h3:before {
+    content: "Sykkelnummer";
+    display: block;
+    font-weight: 300;
+    text-transform: uppercase;
+    font-size: 1.2rem;
 }
 .available-bikes .bike__info .progress {
     position: relative;
@@ -159,4 +188,5 @@ h2 {
 footer {
     text-align: center;
     padding: 1rem;
+    margin-top: auto;
 }
