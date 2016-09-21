@@ -27,6 +27,12 @@ public class BikeService {
 
         parkingSpots.get(1).addBike(new Bike(1, 0.50, true));
         parkingSpots.get(1).addBike(new Bike(2, 0.75, true));
+        parkingSpots.get(1).addBike(new Bike(37, 0.72, true));
+        parkingSpots.get(1).addBike(new Bike(102, 0.18, true));
+        parkingSpots.get(1).addBike(new Bike(38, 0.10, true));
+        parkingSpots.get(1).addBike(new Bike(84, 1.0, true));
+        parkingSpots.get(1).addBike(new Bike(6, 1.0, true));
+
         parkingSpots.get(1).addBike(new Bike(3, 0, false));
     }
 

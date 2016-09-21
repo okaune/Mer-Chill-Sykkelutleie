@@ -16,6 +16,20 @@ $(document).ready(function(){
    });
 });
 
+$(document).on("click", '.bike', function(event) {
+    var id = event.currentTarget.innerText.replace(/(\r\n|\n|\r)/gm,"");
+
+    $("body").append(
+        '<div class="reserveModal">' +
+            '<h3>Vil du reservere sykkel nr. ' + id + '?</h3>' +
+            '<div class="btn-group">' +
+                '<button class="btn btn-default">Ja</button>' +
+                '<button class="btn btn-default">Nei</button>' +
+            '</div>' +
+        '</div>'
+    );
+});
+
 function addContent(data) {
     var bikes =  $(".available-bikes");
     var parkingInfo = $(".parking-info");
