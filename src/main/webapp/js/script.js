@@ -1,4 +1,13 @@
 $(document).ready(function(){
+    $.ajax({
+        url: "rest/parkingspots/",
+        type: 'GET',
+        data: {
+            format: 'json'
+        },
+        success: buildDropdown
+    });
+
    $(".selectpicker").change(function() {
        var id = $(this).val();
        var mainArea = $(".main-area");
@@ -44,6 +53,15 @@ $(document).on("click", '.btn-cancel', function() {
         }
     );
 });
+
+function buildDropdown(data) {
+    var dropdown = $(".selectpicker");
+    for (var location in data) {
+        dropdown.append(
+            '<option value="' + data[location].id + '">' + data[location].locationName + '</option>'
+        );
+    }
+}
 
 function addContent(data) {
     var bikes =  $(".available-bikes");
