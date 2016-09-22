@@ -33,7 +33,24 @@ public class BikeService {
         parkingSpots.get(1).addBike(new Bike(84, 1.0, true));
         parkingSpots.get(1).addBike(new Bike(6, 1.0, true));
 
-        parkingSpots.get(1).addBike(new Bike(3, 0, false));
+        parkingSpots.get(2).addBike(new Bike(28, 1.0, true));
+        parkingSpots.get(2).addBike(new Bike(8, 0.50, true));
+        parkingSpots.get(2).addBike(new Bike(69, 0.75, true));
+        parkingSpots.get(2).addBike(new Bike(39, 0.72, true));
+        parkingSpots.get(2).addBike(new Bike(102, 0.18, true));
+
+        parkingSpots.get(3).addBike(new Bike(10, 1.0, true));
+        parkingSpots.get(3).addBike(new Bike(116, 0.20, true));
+        parkingSpots.get(3).addBike(new Bike(22, 0.88, true));
+        parkingSpots.get(3).addBike(new Bike(30, 0.70, true));
+
+        parkingSpots.get(4).addBike(new Bike(68, 0.27, true));
+        parkingSpots.get(4).addBike(new Bike(119, 0.64, true));
+        parkingSpots.get(4).addBike(new Bike(3, 0.40, true));
+
+        parkingSpots.get(5).addBike(new Bike(51, 0.90, true));
+
+
     }
 
     @GET
