@@ -18,12 +18,12 @@ public class BikeService {
     private static HashMap<Integer, ParkingSpot> parkingSpots;
     static {
         parkingSpots = new HashMap<>();
-        parkingSpots.put(1, new ParkingSpot(1, "Dragvoll"));
-        parkingSpots.put(2, new ParkingSpot(2, "Gløshaugen"));
-        parkingSpots.put(3, new ParkingSpot(3, "Kalvskinnet"));
-        parkingSpots.put(4, new ParkingSpot(4, "Midtbyen"));
-        parkingSpots.put(5, new ParkingSpot(5, "Solsiden"));
-        parkingSpots.put(6, new ParkingSpot(6, "Malvik"));
+        parkingSpots.put(1, new ParkingSpot(1, "Dragvoll", 30));
+        parkingSpots.put(2, new ParkingSpot(2, "Gløshaugen", 30));
+        parkingSpots.put(3, new ParkingSpot(3, "Kalvskinnet", 20));
+        parkingSpots.put(4, new ParkingSpot(4, "Midtbyen", 10));
+        parkingSpots.put(5, new ParkingSpot(5, "Solsiden", 10));
+        parkingSpots.put(6, new ParkingSpot(6, "Malvik", 1));
 
         parkingSpots.get(1).addBike(new Bike(1, 0.50, true));
         parkingSpots.get(1).addBike(new Bike(2, 0.75, true));

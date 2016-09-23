@@ -84,7 +84,7 @@ function openReserveModal(id) {
         '<h3>Reservert</h3>' +
         '<p>Du har reservert sykkelnr. ' + id + '</p>' +
         '<p>Koden ved uthenting ' + Math.floor(id * 100 * Math.random()) + '</p>' +
-        '<p>Sykkelen må hentes innen ' + currentDate.getHours() + ':' + currentDate.getMinutes() + '</p>' +
+        '<p>Sykkelen må hentes innen ' + ('0' + currentDate.getHours()).slice(-2) + ':' + ('0' + currentDate.getMinutes()).slice(-2) + '</p>' +
         '<div class="btn-group">' +
         '<button class="btn btn-default btn-cancel">Lukk</button>' +
         '</div>' +
@@ -120,11 +120,13 @@ function addContent(data) {
     var bikes =  $(".available-bikes");
     var parkingInfo = $(".parking-info");
 
+    console.log(data);
+
     parkingInfo.html(
         '<p>Sykler tilgjengelig: <span>' +
-        data.capacity +
+        data.availableBikes.length +
         '</span> Ledige plasser: <span>' +
-        data.unavailableBikeCount +
+        (data.capacity - data.availableBikes.length) +
         '</span></p>'
     );
     bikes.html("");

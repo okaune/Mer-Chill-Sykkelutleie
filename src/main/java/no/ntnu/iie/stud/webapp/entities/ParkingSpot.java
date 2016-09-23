@@ -22,9 +22,10 @@ public class ParkingSpot {
 
     }
 
-    public ParkingSpot(int id, String locationName) {
+    public ParkingSpot(int id, String locationName, int capacity) {
         this.id = id;
         this.locationName = locationName;
+        this.capacity = capacity;
         this.bikes = new HashMap<>();
         this.bookings = new HashMap<>();
     }
