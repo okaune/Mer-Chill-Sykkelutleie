@@ -1,9 +1,7 @@
 package no.ntnu.iie.stud.webapp.entities;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Random;
@@ -15,7 +13,7 @@ public class ParkingSpot {
     private int id;
     private String locationName;
     private int capacity;
-    private HashMap<Integer, Bike> bikes;
+    private HashMap<Integer, Bike> parkedBikes;
     private HashMap<Integer, Booking> bookings;
 
     public ParkingSpot() {
@@ -26,7 +24,7 @@ public class ParkingSpot {
         this.id = id;
         this.locationName = locationName;
         this.capacity = capacity;
-        this.bikes = new HashMap<>();
+        this.parkedBikes = new HashMap<>();
         this.bookings = new HashMap<>();
     }
 
@@ -55,39 +53,30 @@ public class ParkingSpot {
         this.capacity = capacity;
     }
 
-    public HashMap<Integer, Bike> getBikes() {
-        return bikes;
+    public HashMap<Integer, Bike> getParkedBikes() {
+        return parkedBikes;
     }
 
     public Collection<Bike> getAvailableBikes() {
-        Collection<Bike> availableBikes = new ArrayList<Bike>();
-        for (Bike bike : bikes.values()) {
-            if(bike.isAvailable())
-                availableBikes.add(bike);
-        }
-        return availableBikes;
+        return parkedBikes.values();
     }
 
-    public void setAvailableBikes(Collection<Bike> bikes) {
-
-    }
-
-    public int getUnavailableBikeCount() {
-        return bikes.size() - getAvailableBikes().size();
-    }
-
-    public void setUnavailableBikeCount(int count) {
+    public void setAvailableBikes(Collection<Bike> availableBikes) {
 
     }
 
     public void addBike(Bike bike) {
-        bikes.put(bike.getId(), bike);
+        parkedBikes.put(bike.getId(), bike);
+    }
+
+    public void removeBike(int bikeId) {
+        parkedBikes.remove(bikeId);
     }
 
     public Booking createBooking(String username, int bikeId) {
         if(bookings.containsKey(bikeId)) return null;
-        if(!bikes.containsKey(bikeId)) return null;
-        Bike bike = bikes.get(bikeId);
+        if(!parkedBikes.containsKey(bikeId)) return null;
+        Bike bike = parkedBikes.get(bikeId);
         Booking booking = new Booking(bike, username, generateBookingCode());
         bookings.put(bikeId, booking);
         bike.setAvailable(false);
@@ -109,7 +98,7 @@ public class ParkingSpot {
             bookings.remove(bikeId);
 
             // Reset bike state
-            Bike bike = bikes.get(bikeId);
+            Bike bike = parkedBikes.get(bikeId);
             bike.setAvailable(true);
             return false;
         }
